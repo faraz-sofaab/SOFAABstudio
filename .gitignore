@@ -20,3 +20,7 @@ CLAUDE.local.md
 .claude/rules/*.local.md
 .claude/agents/*.local.*
 .claude/commands/*.local.*
+
+# Verification / browser-automation session artifacts
+.playwright-mcp/
+verify-*.png
