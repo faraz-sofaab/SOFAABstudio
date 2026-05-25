@@ -269,7 +269,6 @@ function updateCSSPreview() {
 
 // --- EXPOSE GLOBALS ---
 window.setStep = setStep;
-window.refreshAssetList = refreshAssetList;
 window.resetSettings = resetSettings;
 
 // --- RESET & UNDO ---
