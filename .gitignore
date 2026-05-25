@@ -4,3 +4,19 @@
 fabric textures/dashboard/uploads/
 fabric textures/dashboard/generated/
 fabric textures/dashboard/dashboard/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node (if/when added)
+node_modules/
+
+# Claude personal context (not shared with team)
+CLAUDE.local.md
+.claude/settings.local.json
+.claude/rules/*.local.md
+.claude/agents/*.local.*
+.claude/commands/*.local.*
