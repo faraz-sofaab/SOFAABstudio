@@ -1,0 +1,6 @@
+.DS_Store
+*.db
+*.sqlite
+fabric textures/dashboard/uploads/
+fabric textures/dashboard/generated/
+fabric textures/dashboard/dashboard/
