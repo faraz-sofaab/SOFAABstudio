@@ -8,17 +8,13 @@ Two independent surfaces share this repo. They do not import each other.
 
 ## 1. Fabric digitisation pipeline (`fabric textures/`)
 
-Three entry points share the same OpenCV PBR generation primitives but live in separate files:
+Single entry point: the Flask dashboard at `dashboard/app.py`.
 
 | Entry point | Purpose | Output |
 |---|---|---|
-| `generate_pbr_maps.py` | Batch CLI for raw textures, no tiling logic | `<base>_albedo.jpg`, `_normal.jpg`, `_roughness.jpg`, `_specular.jpg`, `_ao.jpg` |
-| `generate_model_viewer_pbr.py` | Batch CLI with seamless tiling + ORM packing | `<base>_basecolor.jpg`, `_normal.jpg`, `_orm.jpg` |
 | `dashboard/app.py` | Flask web app with SQLite, per-texture settings, UI-driven generation | `generated/<base>/<base>_{diffuse,normal,roughness,occlusion,orm,metallic_roughness}.jpg` |
 
-The dashboard's `generate_pbr()` is the most evolved variant: it adds `delight_image()` (high-pass to flatten lighting gradients) and tunable parameters (brightness, contrast, hue, saturation, edge crop, mirror tiling, normal strength, resolution).
-
-The two CLI scripts are essentially historical / standalone copies of the same algorithm. Treat `dashboard/app.py:generate_pbr` as the source of truth.
+`generate_pbr()` includes `delight_image()` (high-pass to flatten lighting gradients) and tunable parameters (brightness, contrast, hue, saturation, edge crop, mirror tiling, normal strength, resolution). Earlier history had two standalone CLI scripts (`generate_pbr_maps.py`, `generate_model_viewer_pbr.py`) — these were removed as redundant; the dashboard's `generate_pbr` is the source of truth.
 
 ## 2. AI Advisor (`sofaab-advisor.jsx`)
 

@@ -27,16 +27,6 @@ Remove-Item -Recurse uploads -ErrorAction SilentlyContinue
 Remove-Item -Recurse generated -ErrorAction SilentlyContinue
 ```
 
-## Batch-generate maps from the CLI (no dashboard)
-
-```powershell
-# Seamless ORM-packed for <model-viewer>
-python "fabric textures/generate_model_viewer_pbr.py" --input_dir <scans-folder> --output_dir <out> --resolution 2048
-
-# Plain PBR set (no tiling)
-python "fabric textures/generate_pbr_maps.py" --input_dir <scans-folder> --output_dir <out>
-```
-
 ## Inspect generated maps for a single texture (dashboard mode)
 
 Files land at `fabric textures/dashboard/generated/<base_name>/<base_name>_*.jpg`. Re-running `/api/generate/<id>` with new settings overwrites them in place.

@@ -5,9 +5,8 @@ Fabric textures digitisation pipeline for SOFAAB (premium Indian furniture brand
 ## Components
 
 - `sofaab-advisor.jsx` — Single-file React component. Chat UI calling Google Gemini directly from the browser. Demo/prototype, not bundled or built yet.
-- `fabric textures/generate_pbr_maps.py` — Standalone CLI. Generates Albedo / Normal / Roughness / Specular / AO from one or more base textures.
-- `fabric textures/generate_model_viewer_pbr.py` — Standalone CLI. Adds seamless tiling + ORM packing for glTF / `<model-viewer>`.
-- `fabric textures/dashboard/` — Flask web app. SQLite-backed library + browser UI for uploading scans, tuning PBR parameters, and previewing on a GLB model with Three.js.
+- `fabric textures/dashboard/` — Flask web app. SQLite-backed library + browser UI for uploading scans, tuning PBR parameters, and previewing on a GLB model with Three.js. Single source of truth for PBR generation (`app.py:generate_pbr`).
+- `fabric textures/samples/` — Reference inputs (a known-good fabric scan and the default GLB model) used for testing the dashboard end-to-end.
 
 ## Stack
 
@@ -18,7 +17,6 @@ Fabric textures digitisation pipeline for SOFAAB (premium Indian furniture brand
 ## Run
 
 - Dashboard: `cd "fabric textures/dashboard"; python app.py` → http://127.0.0.1:8081 (Flask debug mode).
-- Standalone PBR gen: `python "fabric textures/generate_model_viewer_pbr.py" --input_dir <dir> --output_dir <dir> --resolution 2048`.
 - Advisor JSX: no build pipeline yet — paste into a React playground or wire into a Vite/Next host.
 
 ## Conventions

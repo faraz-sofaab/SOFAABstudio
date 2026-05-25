@@ -15,8 +15,6 @@ flowchart LR
 
   subgraph Pipeline["Fabric textures pipeline"]
     direction TB
-    CLI1[generate_pbr_maps.py\nbatch CLI, no tiling]
-    CLI2[generate_model_viewer_pbr.py\nbatch CLI, ORM + seamless]
     subgraph Dashboard["dashboard/ (Flask)"]
       App[app.py\nFlask routes + generate_pbr]
       DB[(SQLite\ndatabase.db)]
@@ -26,10 +24,12 @@ flowchart LR
     end
     UI[templates/index.html\n+ static/app.js\nvanilla JS + Three.js]
     UI <-->|/api/*| App
+    Samples[(samples/\nreference inputs)]
+    Samples -.test fixture.-> UI
   end
 ```
 
-The two CLI scripts and the dashboard's `generate_pbr()` share the same algorithmic skeleton. The dashboard is the most evolved variant (adds delighting, parameterised settings, mirror tiling).
+`generate_pbr()` in `dashboard/app.py` is the single source of truth for the PBR pipeline (delighting, parameterised settings, mirror tiling). Earlier standalone CLI scripts have been removed as redundant.
 
 ## Folder structure
 
@@ -51,15 +51,15 @@ SOFAABstudio/
 │   └── workflow-diagrams.md
 ├── sofaab-advisor.jsx              # standalone React component (Gemini chat)
 └── fabric textures/
-    ├── generate_pbr_maps.py        # CLI: basic PBR set
-    ├── generate_model_viewer_pbr.py# CLI: seamless ORM-packed PBR
+    ├── samples/                    # reference inputs (fabric scan + GLB) for end-to-end testing
     └── dashboard/
         ├── app.py                  # Flask + SQLite + PBR generation
         ├── templates/index.html    # SPA shell
         └── static/
             ├── app.js              # vanilla JS + Three.js LuxuryEngine
             ├── index.css
-            ├── sample_model.glb    # default model
+            ├── models/
+            │   └── brooklyn3smodel.glb  # default model loaded by the 3D step
             ├── studio_hdri.jpg
             ├── studio_lighting.jpg
             ├── studio_lighting_v2.jpg
